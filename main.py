@@ -29,7 +29,7 @@ app.add_middleware(
 async def status():
     return {"success": True}
 
-@app.get("/auth")
+@app.post("/auth")
 async def auth(request: Request):
     data = await request.json()
     if data["auth_token"] == auth_token:
@@ -37,7 +37,7 @@ async def auth(request: Request):
     else:
         raise HTTPException(status_code=401, detail="Unauthorized")
     
-@app.get("/key_metrics")
+@app.post("/key_metrics")
 async def key_metrics(request: Request):
     data = await request.json()
     ticker = data["ticker"]
@@ -45,7 +45,7 @@ async def key_metrics(request: Request):
     response = requests.get(base_url_key_metrics)
     return response.json()
 
-@app.get("/financial_ratios")
+@app.post("/financial_ratios")
 async def financial_ratios(request: Request):
     data = await request.json()
     ticker = data["ticker"]
