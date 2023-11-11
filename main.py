@@ -29,7 +29,7 @@ app.add_middleware(
 async def status():
     return {"success": True}
 
-@app.post("/auth")
+@app.post("//auth")
 async def auth(request: Request):
     data = await request.json()
     if data["auth_token"] == auth_token:
@@ -37,7 +37,7 @@ async def auth(request: Request):
     else:
         raise HTTPException(status_code=401, detail="Unauthorized")
     
-@app.post("/key_metrics")
+@app.post("//key_metrics")
 async def key_metrics(request: Request):
     data = await request.json()
     ticker = data["ticker"]
@@ -45,13 +45,53 @@ async def key_metrics(request: Request):
     response = requests.get(base_url_key_metrics)
     return response.json()
 
-@app.post("/financial_ratios")
+@app.post("//financial_ratios")
 async def financial_ratios(request: Request):
     data = await request.json()
     ticker = data["ticker"]
     base_url_financial_ratios = f"https://fmpcloud.io/api/v3/ratios/{ticker}?datatype={datatype}&apikey={api_key}"
     response = requests.get(base_url_financial_ratios)
     return response.json()
+
+@app.post("//quote")
+async def quote(request: Request):
+    data = await request.json()
+    ticker = data["ticker"]
+    base_url_quote = f"https://fmpcloud.io/api/v3/quote/{ticker}?datatype={datatype}&apikey={api_key}"
+    response = requests.get(base_url_quote)
+    return response.json()
+
+@app.post("//technical_indicators")
+async def technical_indicators(request: Request):
+    #SMA - EMA - WMA - DEMA - TEMA - williams - RSI - ADX - standardDeviation
+    data = await request.json()
+    ticker = data["ticker"]
+    indicator = data["indicator"]
+    period = data["period"]
+    # url = https://fmpcloud.io/api/v3/technical_indicator/daily/AAPL?period=10&type=ema&apikey=c8a7ba8496a4eb4c302aafb9eb6eeea2
+    base_url_technical_indicators = f"https://fmpcloud.io/api/v3/technical_indicator/daily/{ticker}?period={period}&type={indicator}&apikey={api_key}"
+    response = requests.get(base_url_technical_indicators)
+    return response.json()
+
+@app.post("//forex_quote")
+async def forex_quote(request: Request):
+    #https://fmpcloud.io/api/v3/historical-price-full/JPYUSD?timeseries=5&apikey=c8a7ba8496a4eb4c302aafb9eb6eeea2
+    data = await request.json()
+    ticker = data["ticker"]
+    base_url_forex_quote = f"https://fmpcloud.io/api/v3/historical-price-full/{ticker}?timeseries=5&apikey={api_key}"
+    response = requests.get(base_url_forex_quote)
+    return response.json()
+
+@app.post("//crypto_quote")
+async def crypto_quote(request: Request):
+    #https://fmpcloud.io/api/v3/historical-price-full/BTCUSD?timeseries=5&apikey=c8a7ba8496a4eb4c302aafb9eb6eeea2
+    data = await request.json()
+    ticker = data["ticker"]
+    base_url_crypto_quote = f"https://fmpcloud.io/api/v3/historical-price-full/{ticker}?timeseries=5&apikey={api_key}"
+    response = requests.get(base_url_crypto_quote)
+    return response.json()
+
+
 
 if __name__ == "__main__":
     asyncio.run(uvicorn.run(app, host="0.0.0.0", port=8080))
