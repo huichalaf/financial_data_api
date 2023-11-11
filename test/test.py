@@ -6,7 +6,7 @@ import os
 dotenv.load_dotenv()
 
 # The base URL where your FastAPI application is running
-BASE_URL = "http://localhost:8000"
+BASE_URL = "http://localhost:8080"
 
 # Define the ticker symbol you want to test
 ticker_to_test = 'AAPL'

@@ -1,4 +1,4 @@
-FROM python:3.11-slim-bullseye
+FROM python:3.11-slim-buster
 
 # Path: /app
 WORKDIR /app
@@ -11,6 +11,8 @@ RUN pip install -r requirements.txt
 
 # Path: /app
 COPY . .
+
+EXPOSE 8080
 
 # Path: /app
 CMD ["python", "main.py"]
