@@ -1,0 +1,421 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+      "title": "Financial Data API",
+      "description": "Provides key financial metrics and ratios for specified stock tickers.",
+      "version": "v1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://assistants-api-aidtogrow.fly.dev/"
+      }
+    ],
+    "paths": {
+      "/auth": {
+        "post": {
+          "description": "Authenticates the user with a token",
+          "operationId": "AuthenticateUser",
+          "parameters": [],
+          "requestBody": {
+            "description": "Auth token to validate",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "auth_token": {
+                      "type": "string",
+                      "description": "The auth token for the user"
+                    }
+                  },
+                  "required": [
+                    "auth_token"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Authentication successful"
+            },
+            "401": {
+              "description": "Authentication failed"
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/key_metrics": {
+        "post": {
+          "description": "Gets key metrics for a specified ticker",
+          "operationId": "GetKeyMetrics",
+          "parameters": [],
+          "requestBody": {
+            "description": "Ticker to retrieve key metrics for",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ticker": {
+                      "type": "string",
+                      "description": "The stock ticker to retrieve key metrics for"
+                    }
+                  },
+                  "required": [
+                    "ticker"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Key metrics retrieved successfully"
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/financial_ratios": {
+        "post": {
+          "description": "Gets financial ratios for a specified ticker",
+          "operationId": "GetFinancialRatios",
+          "parameters": [],
+          "requestBody": {
+            "description": "Ticker to retrieve financial ratios for",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ticker": {
+                      "type": "string",
+                      "description": "The stock ticker to retrieve financial ratios for"
+                    }
+                  },
+                  "required": [
+                    "ticker"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Financial ratios retrieved successfully"
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/quote": {
+        "post": {
+          "description": "Gets the latest stock quote for a specified ticker",
+          "operationId": "GetStockQuote",
+          "parameters": [],
+          "requestBody": {
+            "description": "Ticker to retrieve the latest stock quote for",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ticker": {
+                      "type": "string",
+                      "description": "The stock ticker to retrieve the quote for"
+                    }
+                  },
+                  "required": [
+                    "ticker"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Stock quote retrieved successfully"
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/technical_indicators": {
+        "post": {
+          "description": "Gets technical indicators for a specified ticker",
+          "operationId": "GetTechnicalIndicators",
+          "parameters": [],
+          "requestBody": {
+            "description": "Ticker and indicator to retrieve the technical data for",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ticker": {
+                      "type": "string",
+                      "description": "The stock ticker to retrieve technical indicators for"
+                    },
+                    "indicator": {
+                      "type": "string",
+                      "description": "The technical indicator to retrieve (e.g., SMA, EMA)"
+                    },
+                    "period": {
+                      "type": "integer",
+                      "description": "The period to calculate the technical indicator over"
+                    }
+                  },
+                  "required": [
+                    "ticker",
+                    "indicator",
+                    "period"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Technical indicators retrieved successfully"
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/forex_quote": {
+        "post": {
+          "description": "Gets the historical forex quotes for a specified ticker",
+          "operationId": "GetForexQuote",
+          "parameters": [],
+          "requestBody": {
+            "description": "Ticker to retrieve historical forex quotes for",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ticker": {
+                      "type": "string",
+                      "description": "The forex ticker to retrieve historical quotes for"
+                    }
+                  },
+                  "required": [
+                    "ticker"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Forex quotes retrieved successfully"
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/crypto_quote": {
+        "post": {
+          "description": "Gets the historical cryptocurrency quotes for a specified ticker",
+          "operationId": "GetCryptoQuote",
+          "parameters": [],
+          "requestBody": {
+            "description": "Ticker to retrieve historical cryptocurrency quotes for",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ticker": {
+                      "type": "string",
+                      "description": "The cryptocurrency ticker to retrieve historical quotes for"
+                    }
+                  },
+                  "required": [
+                    "ticker"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Cryptocurrency quotes retrieved successfully"
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/discounted_cash_flow": {
+        "post": {
+          "description": "Gets the discounted cash flow for a specified ticker",
+          "operationId": "GetDiscountedCashFlow",
+          "parameters": [],
+          "requestBody": {
+            "description": "Ticker to retrieve discounted cash flow for",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ticker": {
+                      "type": "string",
+                      "description": "The stock ticker to retrieve discounted cash flow for"
+                    }
+                  },
+                  "required": [
+                    "ticker"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Discounted cash flow retrieved successfully"
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/rating": {
+        "post": {
+          "description": "Gets the rating for a specified ticker",
+          "operationId": "GetRating",
+          "parameters": [],
+          "requestBody": {
+            "description": "Ticker to retrieve rating for",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ticker": {
+                      "type": "string",
+                      "description": "The stock ticker to retrieve rating for"
+                    }
+                  },
+                  "required": [
+                    "ticker"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Rating retrieved successfully"
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/company_profile": {
+        "post": {
+          "description": "Gets the company profile for a specified ticker",
+          "operationId": "GetCompanyProfile",
+          "parameters": [],
+          "requestBody": {
+            "description": "Ticker to retrieve the company profile for",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ticker": {
+                      "type": "string",
+                      "description": "The stock ticker to retrieve the company profile for"
+                    }
+                  },
+                  "required": [
+                    "ticker"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Company profile retrieved successfully"
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/top_gainers": {
+        "post": {
+          "description": "Gets the list of top gainer stocks",
+          "operationId": "GetTopGainers",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "Top gainers list retrieved successfully"
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/top_losers": {
+        "post": {
+          "description": "Gets the list of top loser stocks",
+          "operationId": "GetTopLosers",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "Top losers list retrieved successfully"
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          },
+          "deprecated": false
+        }
+      }
+    },
+    "components": {
+      "schemas": {}
+    }
+  }
+  

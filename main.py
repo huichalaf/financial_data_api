@@ -93,7 +93,46 @@ async def crypto_quote(request: Request, api_key: str = Depends(validate_api_key
     response = requests.get(base_url_crypto_quote)
     return response.json()
 
+@app.post("//discounted_cash_flow")
+async def discounted_cash_flow(request: Request, api_key: str = Depends(validate_api_key)):
+    #https://fmpcloud.io/api/v3/discounted-cash-flow/AAPL?apikey=c8a7ba8496a4eb4c302aafb9eb6eeea2
+    data = await request.json()
+    ticker = data["ticker"]
+    base_url_discounted_cash_flow = f"https://fmpcloud.io/api/v3/discounted-cash-flow/{ticker}?apikey={api_key_fmp}"
+    response = requests.get(base_url_discounted_cash_flow)
+    return response.json()
 
+@app.post("//rating")
+async def rating(request: Request, api_key: str = Depends(validate_api_key)):
+    #https://fmpcloud.io/api/v3/rating/AAPL?apikey=c8a7ba8496a4eb4c302aafb9eb6eeea2
+    data = await request.json()
+    ticker = data["ticker"]
+    base_url_rating = f"https://fmpcloud.io/api/v3/rating/{ticker}?apikey={api_key_fmp}"
+    response = requests.get(base_url_rating)
+    return response.json()
+
+@app.post("//company_profile")
+async def company_profile(request: Request, api_key: str = Depends(validate_api_key)):
+    #https://fmpcloud.io/api/v3/profile/AAPL?apikey=c8a7ba8496a4eb4c302aafb9eb6eeea2
+    data = await request.json()
+    ticker = data["ticker"]
+    base_url_company_profile = f"https://fmpcloud.io/api/v3/profile/{ticker}?apikey={api_key_fmp}"
+    response = requests.get(base_url_company_profile)
+    return response.json()
+
+@app.post("//top_gainers")
+async def top_gainers(request: Request, api_key: str = Depends(validate_api_key)):
+    #https://fmpcloud.io/api/v3/gainers?apikey=c8a7ba8496a4eb4c302aafb9eb6eeea2
+    base_url_top_gainers = f"https://fmpcloud.io/api/v3/gainers?apikey={api_key_fmp}"
+    response = requests.get(base_url_top_gainers)
+    return response.json()
+
+@app.post("//top_losers")
+async def top_losers(request: Request, api_key: str = Depends(validate_api_key)):
+    #https://fmpcloud.io/api/v3/losers?apikey=c8a7ba8496a4eb4c302aafb9eb6eeea2
+    base_url_top_losers = f"https://fmpcloud.io/api/v3/losers?apikey={api_key_fmp}"
+    response = requests.get(base_url_top_losers)
+    return response.json()
 
 if __name__ == "__main__":
     asyncio.run(uvicorn.run(app, host="0.0.0.0", port=8080))
